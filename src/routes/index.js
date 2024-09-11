@@ -6,14 +6,14 @@ const router = Router();
 /**
  * single file upload
  */
-// router.post("/files", upload.single("avatar"), (req, res, next) => {
-//   try {
-//     console.log(req.file);
-//     res.send("File uploaded successfully");
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.post("/files", upload.single("avatar"), (req, res, next) => {
+  try {
+    console.log(req.file);
+    res.send("File uploaded successfully");
+  } catch (error) {
+    next(error);
+  }
+});
 
 /**
  * multiple similar type file upload
@@ -30,23 +30,23 @@ const router = Router();
 /**
  * multiple different type file upload
  */
-const fields = [
-  {
-    name: "avatar",
-    maxCount: 1,
-  },
-  {
-    name: "gallery",
-    maxCount: 3,
-  },
-];
-router.post("/files", upload.fields(fields), (req, res, next) => {
-  try {
-    console.log(req.files);
-    res.send("File uploaded successfully");
-  } catch (error) {
-    next(error);
-  }
-});
+// const fields = [
+//   {
+//     name: "avatar",
+//     maxCount: 1,
+//   },
+//   {
+//     name: "docs",
+//     maxCount: 3,
+//   },
+// ];
+// router.post("/files", upload.fields(fields), (req, res, next) => {
+//   try {
+//     console.log(req.files);
+//     res.send("File uploaded successfully");
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = router;

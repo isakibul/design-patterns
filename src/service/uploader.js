@@ -22,17 +22,28 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   // dest: "uploads",
-  storage: storage,
+  // storage: storage,
   limits: {
     fileSize: 5000000,
   },
   fileFilter: (req, file, done) => {
     const fileName = file.mimetype;
-    if (fileName === "image/png" || fileName === "image/jpeg") {
+    const fieldName = file.fieldname;
+
+    if (
+      fieldName === "avatar" &&
+      (fileName === "image/png" || fileName === "image/jpeg")
+    ) {
       done(null, true);
-    } else {
-      done(new Error("Invalid file type"));
+      return;
     }
+
+    if (fileName === "docs" || fileName === "application/pdf") {
+      done(null, true);
+      return;
+    }
+
+    done(new Error("File type not supported"));
   },
 });
 
